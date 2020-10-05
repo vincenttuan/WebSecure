@@ -2,6 +2,7 @@ package com.mycompany.singlesignon;
 
 import java.io.IOException;
 import java.util.Set;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,19 +20,18 @@ public class LoginServlet extends HttpServlet {
             resp.getWriter().print("please input username");
             return;
         }
-        // 是否有登入過 ?
-        Set<String> loginUsernames = (Set<String>)getServletContext().getAttribute("loginUsernames");
+        ServletContext context = getServletContext();
+        Set<String> loginUsernames = (Set<String>)context.getAttribute("loginUsernames");
         boolean hasLogin = loginUsernames.stream().filter(s -> s.equals(username)).findAny().isPresent();
         if(hasLogin) {
-            resp.getWriter().print(username + " already login !");
+            resp.getWriter().print("already login");
         } else {
             HttpSession session = req.getSession();
-            resp.getWriter().print(session.getId());
             session.setAttribute("username", username);
-            loginUsernames.add(username); // 加入到 Set<String> 集合中
-            resp.getWriter().print(username + " login OK !");
+            loginUsernames.add(username);
+            resp.getWriter().print("login ok");
         }
-                
+        
     }
     
 }
