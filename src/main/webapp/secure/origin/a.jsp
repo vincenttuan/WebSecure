@@ -12,6 +12,6 @@
     </head>
     <body onload="init()">
         <h1>A.jsp</h1>
-        <iframe id="myframe" src="https://www.pcschool.com.tw"></iframe>
+        <iframe id="myframe" src="b.jsp" frameborder="1"></iframe>
     </body>
 </html>
