@@ -26,6 +26,7 @@ public class LoginServlet extends HttpServlet {
             resp.getWriter().print(username + " already login !");
         } else {
             HttpSession session = req.getSession();
+            resp.getWriter().print(session.getId());
             session.setAttribute("username", username);
             loginUsernames.add(username); // 加入到 Set<String> 集合中
             resp.getWriter().print(username + " login OK !");
