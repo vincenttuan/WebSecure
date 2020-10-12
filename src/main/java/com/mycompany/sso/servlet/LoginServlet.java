@@ -14,6 +14,8 @@ public class LoginServlet extends BaseServlet {
         String grr = req.getParameter("g-recaptcha-response");
         String json = verifyCaptcha(grr);
         resp.getWriter().print(json);
+        resp.getWriter().print("username:");
+        resp.getWriter().print("password:");
     }
     
 }
