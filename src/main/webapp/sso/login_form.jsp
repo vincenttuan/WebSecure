@@ -21,8 +21,8 @@
             <fieldset>
                 <legend>Login Form</legend>
                 <input type="text" id="g-recaptcha-response" name="g-recaptcha-response"><p />
-                <input type="text" placeholder="Username" name="username" /> 符合:至少一個大寫字母 至少一個小寫字母 至少一個數字 至少一個特殊符號 長度至少8~64個字元<p />
-                <input type="password" placeholder="Password" name="password" /> 符合:SHA-256 + salt<p />
+                <input type="text" placeholder="Username" name="username" />
+                <input type="password" placeholder="Password" name="password" /> 符合:至少一個大寫字母 至少一個小寫字母 至少一個數字 至少一個特殊符號 長度至少8~64個字元, SHA-256 + salt<p />
                 <button type="submit" class="pure-button pure-button-primary">Sign in</button>
             </fieldset>
         </form>
