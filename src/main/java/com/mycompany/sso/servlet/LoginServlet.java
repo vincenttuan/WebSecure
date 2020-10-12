@@ -25,7 +25,7 @@ public class LoginServlet extends BaseServlet {
         
         resp.getWriter().print(json + "<br>");
         resp.getWriter().print("username: " + username + " <br>");
-        resp.getWriter().print("password: " + PasswordRegex.check(password) + ", hash=" + password_hash_salt + " <br>");
+        resp.getWriter().print("password: check=" + PasswordRegex.check(password) + ", salt=" + salt + ", hash=" + password_hash_salt + " <br>");
     }
     
 }
