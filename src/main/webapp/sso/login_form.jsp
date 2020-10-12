@@ -17,7 +17,7 @@
     </head>
     <body style="padding: 20px" onload="init()">
 
-        <form class="pure-form">
+        <form class="pure-form" method="post" action="/WebSecure/sso/login">
             <fieldset>
                 <legend>Login Form</legend>
                 <input type="text" id="g-recaptcha-response" name="g-recaptcha-response"><p />
