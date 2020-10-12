@@ -11,11 +11,12 @@ public class LoginServlet extends BaseServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=utf-8");
         String grr = req.getParameter("g-recaptcha-response");
         String json = verifyCaptcha(grr);
-        resp.getWriter().print(json);
-        resp.getWriter().print("username:");
-        resp.getWriter().print("password:");
+        resp.getWriter().print(json + "<br>");
+        resp.getWriter().print("username:  <br>");
+        resp.getWriter().print("password:  <br>");
     }
     
 }
