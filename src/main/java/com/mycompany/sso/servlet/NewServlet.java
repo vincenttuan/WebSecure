@@ -11,7 +11,7 @@ public class NewServlet extends BaseServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String grr = req.getParameter("grr");
+        String grr = req.getParameter("g-recaptcha-response");
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String email = req.getParameter("email");
