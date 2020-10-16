@@ -29,6 +29,9 @@ public class NewServlet extends BaseServlet {
             resp.getWriter().print("password invalid");
             return;
         }
+        
+        // 建立 member
+        
     }
     
 }

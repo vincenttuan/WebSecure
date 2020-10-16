@@ -5,11 +5,24 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Map;
 import java.util.Scanner;
 import javax.servlet.http.HttpServlet;
 
 public class BaseServlet extends HttpServlet {
+    // 建立 connection
+    private static Connection conn;
+    static {
+        try {
+            String url = "";
+            String user = "app";
+            String password = "app";
+            conn = DriverManager.getConnection(url, user, password);
+        } catch (Exception e) {
+        }
+    }
     
     protected boolean verifyCaptcha(String grr) throws MalformedURLException, IOException {
         String secret = "6Lf_JtYZAAAAAKYtDPaFi-d8gWe-M7L3TejxS5Pa";
