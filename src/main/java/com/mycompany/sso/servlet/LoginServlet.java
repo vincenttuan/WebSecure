@@ -21,9 +21,9 @@ public class LoginServlet extends BaseServlet {
         
         int salt = Salt.getSalt();
         String password_hash_salt = SHA2.getSHA256(password, salt);
-        String json = verifyCaptcha(grr);
+        boolean check = verifyCaptcha(grr);
         
-        resp.getWriter().print(json + "<br>");
+        resp.getWriter().print(check + "<br>");
         resp.getWriter().print("username: " + username + " <br>");
         resp.getWriter().print("password: check=" + PasswordRegex.check(password) + ", salt=" + salt + ", hash=" + password_hash_salt + " <br>");
     }
