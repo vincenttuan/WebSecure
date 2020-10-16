@@ -20,7 +20,9 @@ public class BaseServlet extends HttpServlet {
         // { "success": true, "challenge_ts": "2020-10-16T11:51:14Z", "hostname": "localhost", "score": 0.9, "action": "submit" }
         Gson gson = new Gson();
         Map<String, Object> map = gson.fromJson(json, new TypeToken<Map<String, Object>>(){}.getType());
-        boolean check = Boolean.parseBoolean(map.get("success").toString());
+        boolean success = Boolean.parseBoolean(map.get("success").toString());
+        double score = Double.parseDouble(map.get("score").toString());
+        boolean check = success && score >= 0.5;
         return check;
     }
 }

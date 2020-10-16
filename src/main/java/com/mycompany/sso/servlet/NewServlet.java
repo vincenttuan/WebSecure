@@ -18,7 +18,10 @@ public class NewServlet extends BaseServlet {
         int money = Integer.parseInt(req.getParameter("money"));
         
         // 確認 grr
-        
+        if(!verifyCaptcha(grr)) {
+            resp.getWriter().print("grr false");
+            return;
+        }
         
         // 確認 password
         String regex = "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()]).{8,64}";
