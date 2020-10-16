@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
@@ -26,6 +27,39 @@ public class BaseServlet extends HttpServlet {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+    // A01, 1qaz@WSX
+    protected boolean login(String username, String password) {
+        // 驗證 username
+        String sql = "SELECT username, salt FROM Member WHERE username = ' + username + '";
+        int salt = 0;
+        try(Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);) {
+            if(rs.next()) {
+                salt = rs.getInt("salt"); // 得到 salt
+                System.out.println("Salt:" + salt);
+            } else {
+                System.out.println("無此使用者");
+                return false;
+            }
+        } catch (Exception e) {
+        }
+        
+        // 驗證 password
+        password = SHA2.getSHA256(password, salt);
+        sql = "SELECT username, password, salt FROM Member WHERE username = ' + username + ' and password = ' + password + ' and salt =  + salt + ";
+        try(Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);) {
+            if(rs.next()) {
+                System.out.println("驗證 password 成功");
+                return true;
+            } else {
+                System.out.println("驗證 password 失敗");
+                return false;
+            }
+        } catch (Exception e) {
+        }
+        return false;
     }
     
     protected boolean saveMember(String username, String password, String email, int money) {
