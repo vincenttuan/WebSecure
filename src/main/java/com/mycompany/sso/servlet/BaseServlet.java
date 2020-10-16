@@ -2,12 +2,14 @@ package com.mycompany.sso.servlet;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mycompany.sso.SHA2;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import javax.servlet.http.HttpServlet;
 
@@ -16,12 +18,25 @@ public class BaseServlet extends HttpServlet {
     private static Connection conn;
     static {
         try {
-            String url = "";
+            String url = "jdbc:derby://localhost:1527/security";
             String user = "app";
             String password = "app";
             conn = DriverManager.getConnection(url, user, password);
         } catch (Exception e) {
         }
+    }
+    
+    protected boolean saveMember(String username, String password, String email, int money) {
+        int salt = new Random().nextInt(10_0000);
+        password = SHA2.getSHA256(password, salt);
+        int bonus = new Random().nextInt(10_0000);
+        
+        String sql_1 = "INSERT INTO Member(username, password, salt, email) VALUES ('%s', '%s', %d, '%s')";
+        String sql_2 = "INSERT INTO Salary(username, money, bonus) VALUES ('%s', %d, %d)";
+        sql_1 = String.format(sql_1, username, password, salt, email);
+        sql_2 = String.format(sql_2, username, money, bonus);
+        
+        return true;
     }
     
     protected boolean verifyCaptcha(String grr) throws MalformedURLException, IOException {
