@@ -8,6 +8,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.Statement;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
@@ -36,7 +38,35 @@ public class BaseServlet extends HttpServlet {
         sql_1 = String.format(sql_1, username, password, salt, email);
         sql_2 = String.format(sql_2, username, money, bonus);
         
-        return true;
+        try(Statement stmt = conn.createStatement()) {
+            conn.setAutoCommit(false); // 不要自動 commit (提交給資料庫)
+            stmt.clearBatch();
+            stmt.addBatch(sql_1);
+            stmt.addBatch(sql_2);
+            int[] rowscount = stmt.executeBatch();
+            conn.commit(); // 手動 commit
+            
+            if(Arrays.stream(rowscount).sum() == 2) {
+                return true;
+            } else {
+                conn.rollback(); // 回復原狀
+            }
+            
+        } catch (Exception e) {
+            try {
+                conn.rollback(); // 回復原狀
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        } finally {
+            // 回復自動 commit
+            try {
+                conn.setAutoCommit(true);
+            } catch (Exception e3) {
+                e3.printStackTrace();
+            }
+        }
+        return false;
     }
     
     protected boolean verifyCaptcha(String grr) throws MalformedURLException, IOException {
