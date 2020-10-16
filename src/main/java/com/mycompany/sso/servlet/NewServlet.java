@@ -31,7 +31,8 @@ public class NewServlet extends BaseServlet {
         }
         
         // 建立 member
-        
+        boolean check = saveMember(username, password, email, money);
+        resp.getWriter().print(check);
     }
     
 }

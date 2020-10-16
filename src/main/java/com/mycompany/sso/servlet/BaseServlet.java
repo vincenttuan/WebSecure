@@ -59,9 +59,8 @@ public class BaseServlet extends HttpServlet {
                 e2.printStackTrace();
             }
         } finally {
-            // 回復自動 commit
             try {
-                conn.setAutoCommit(true);
+                conn.setAutoCommit(true); // 回復自動 commit
             } catch (Exception e3) {
                 e3.printStackTrace();
             }
