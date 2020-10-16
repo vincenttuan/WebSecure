@@ -7,6 +7,7 @@ import java.util.Scanner;
 import javax.servlet.http.HttpServlet;
 
 public class BaseServlet extends HttpServlet {
+    
     protected String verifyCaptcha(String grr) throws MalformedURLException, IOException {
         String secret = "6Lf_JtYZAAAAAKYtDPaFi-d8gWe-M7L3TejxS5Pa";
         String remoteip = "localhost";
