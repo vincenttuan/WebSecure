@@ -31,7 +31,8 @@ public class BaseServlet extends HttpServlet {
     // A01, 1qaz@WSX
     protected boolean login(String username, String password) {
         // 驗證 username
-        String sql = "SELECT username, salt FROM Member WHERE username = ' + username + '";
+        String sql = "SELECT username, salt FROM Member WHERE username = '" + username + "'";
+        System.out.println(sql);
         int salt = 0;
         try(Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);) {
@@ -47,7 +48,8 @@ public class BaseServlet extends HttpServlet {
         
         // 驗證 password
         password = SHA2.getSHA256(password, salt);
-        sql = "SELECT username, password, salt FROM Member WHERE username = ' + username + ' and password = ' + password + ' and salt =  + salt + ";
+        sql = "SELECT username, password, salt FROM Member WHERE username = '" + username + "' and password = '" + password + "' and salt = " + salt;
+        System.out.println(sql);
         try(Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);) {
             if(rs.next()) {

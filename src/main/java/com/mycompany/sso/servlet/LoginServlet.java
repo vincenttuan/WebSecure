@@ -19,13 +19,20 @@ public class LoginServlet extends BaseServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         
-        int salt = Salt.getSalt();
-        String password_hash_salt = SHA2.getSHA256(password, salt);
         boolean check = verifyCaptcha(grr);
+        if(!check) {
+            resp.getWriter().print("grr invalid");
+            return;
+        }
         
-        resp.getWriter().print(check + "<br>");
-        resp.getWriter().print("username: " + username + " <br>");
-        resp.getWriter().print("password: check=" + PasswordRegex.check(password) + ", salt=" + salt + ", hash=" + password_hash_salt + " <br>");
+        check = login(username, password);
+        if(!check) {
+            resp.getWriter().print("login error");
+            return;
+        }
+        
+        resp.getWriter().print("login ok");
+        
     }
     
 }
