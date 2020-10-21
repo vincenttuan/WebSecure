@@ -12,10 +12,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import javax.servlet.http.HttpServlet;
+import org.apache.commons.dbutils.BasicRowProcessor;
+import org.apache.commons.dbutils.handlers.MapListHandler;
 
 public class BaseServlet extends HttpServlet {
     // 建立 connection
@@ -28,6 +31,20 @@ public class BaseServlet extends HttpServlet {
             ex.printStackTrace();
         }
     }
+    
+    protected List<Map<String, Object>> getMember(String username) {
+        String sql = "SELECT username, email FROM Member WHERE username='" + username + "'";
+        try(Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);) {
+            BasicRowProcessor convert = new BasicRowProcessor();
+            MapListHandler handler = new MapListHandler(convert);
+            return handler.handle(rs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     // A01, 1qaz@WSX
     protected boolean login(String username, String password) {
         // 驗證 username
