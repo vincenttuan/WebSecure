@@ -32,6 +32,19 @@ public class BaseServlet extends HttpServlet {
         }
     }
     
+    protected List<Map<String, Object>> getSalary(String username) {
+        String sql = "SELECT username, money FROM Salary WHERE username='" + username + "'";
+        try(Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);) {
+            BasicRowProcessor convert = new BasicRowProcessor();
+            MapListHandler handler = new MapListHandler(convert);
+            return handler.handle(rs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     protected List<Map<String, Object>> getMember(String username) {
         String sql = "SELECT username, email FROM Member WHERE username='" + username + "'";
         try(Statement stmt = conn.createStatement();
