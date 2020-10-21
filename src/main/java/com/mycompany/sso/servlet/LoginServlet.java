@@ -35,12 +35,7 @@ public class LoginServlet extends BaseServlet {
         }
         
         //resp.getWriter().print("login ok");
-        List<Map<String, Object>> members = getMember(username);
-        
-        RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/sso/view_member.jsp"); 
-        req.setAttribute("username", username);
-        req.setAttribute("members", members);
-        rd.forward(req, resp);
+        resp.sendRedirect("/WebSecure/sso/view/member?username" + username);
     }
     
 }
