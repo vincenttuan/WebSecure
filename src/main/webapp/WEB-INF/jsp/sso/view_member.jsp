@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
     <head>
         <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css">
@@ -16,10 +17,20 @@
                 </tr>
             </thead>
             <tbody>
+                <c:forEach var="map" items="${members}">
                 <tr>
-                    <td>1</td>
-                    <td>Honda</td>
+                    <c:forEach var="m" items="${map}">
+                        <c:choose>
+                            <c:when test="${m.key == 'USERNAME'}">
+                                <td><a href="#">${m.value}</a></td>
+                            </c:when>
+                            <c:when test="${m.key == 'EMAIL'}">
+                                <td>${m.value}</td>
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>
                 </tr>
+                </c:forEach>
             </tbody>
         </table>
     </body>
