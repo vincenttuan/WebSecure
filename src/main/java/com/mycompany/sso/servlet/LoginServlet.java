@@ -4,6 +4,8 @@ import com.mycompany.sso.PasswordRegex;
 import com.mycompany.sso.SHA2;
 import com.mycompany.sso.Salt;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,8 +35,11 @@ public class LoginServlet extends BaseServlet {
         }
         
         //resp.getWriter().print("login ok");
+        List<Map<String, Object>> members = getMember(username);
+        
         RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/sso/view_member.jsp"); 
         req.setAttribute("username", username);
+        req.setAttribute("members", members);
         rd.forward(req, resp);
     }
     
