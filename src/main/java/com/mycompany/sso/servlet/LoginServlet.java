@@ -35,7 +35,7 @@ public class LoginServlet extends BaseServlet {
         }
         
         //resp.getWriter().print("login ok");
-        resp.sendRedirect("/WebSecure/sso/view/member?username" + username);
+        resp.sendRedirect("/WebSecure/sso/view/member?username=" + username);
     }
     
 }
