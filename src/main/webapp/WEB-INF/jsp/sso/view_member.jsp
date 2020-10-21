@@ -7,6 +7,7 @@
     </head>
     <body style="padding: 20px">
         <h1>Hello ${username} 您好 !</h1>
+        ${members}
         <table class="pure-table pure-table-bordered">
             <thead>
                 <tr>
