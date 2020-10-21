@@ -4,6 +4,7 @@ import com.mycompany.sso.PasswordRegex;
 import com.mycompany.sso.SHA2;
 import com.mycompany.sso.Salt;
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,8 +32,10 @@ public class LoginServlet extends BaseServlet {
             return;
         }
         
-        resp.getWriter().print("login ok");
-        
+        //resp.getWriter().print("login ok");
+        RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/sso/view_member.jsp"); 
+        req.setAttribute("username", username);
+        rd.forward(req, resp);
     }
     
 }
