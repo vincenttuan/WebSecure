@@ -21,7 +21,7 @@
                     <c:forEach var="m" items="${map}">
                         <c:choose>
                             <c:when test="${m.key == 'USERNAME'}">
-                                <td><a href="#">${m.value}</a></td>
+                                <td><a href="/WebSecure/sso/view/member?username=${m.value}">${m.value}</a></td>
                             </c:when>
                             <c:when test="${m.key == 'MONEY'}">
                                 <td>${m.value}</td>
