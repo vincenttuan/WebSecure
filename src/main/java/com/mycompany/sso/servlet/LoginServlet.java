@@ -1,16 +1,11 @@
 package com.mycompany.sso.servlet;
 
-import com.mycompany.sso.PasswordRegex;
-import com.mycompany.sso.SHA2;
-import com.mycompany.sso.Salt;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/sso/login")
 public class LoginServlet extends BaseServlet {
@@ -33,7 +28,9 @@ public class LoginServlet extends BaseServlet {
             resp.getWriter().print("login error");
             return;
         }
-        
+        // 加入 session
+        HttpSession session = req.getSession(true);
+        session.setAttribute("username", username);
         //resp.getWriter().print("login ok");
         resp.sendRedirect("/WebSecure/sso/view/member?username=" + username);
     }
