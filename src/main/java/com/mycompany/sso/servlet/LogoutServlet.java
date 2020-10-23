@@ -10,13 +10,24 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/sso/logout")
 public class LogoutServlet extends BaseServlet {
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void doHandler(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if(session != null) {
             session.invalidate();
         }
         resp.sendRedirect("/WebSecure/sso/login_form.jsp");
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doHandler(req, resp);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doHandler(req, resp);
+    }
+    
+    
     
 }
