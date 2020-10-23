@@ -32,5 +32,6 @@
                 </c:forEach>
             </tbody>
         </table>
+        <button type="button" class="pure-button pure-button-primary" onclick="window.location.href='/WebSecure/sso/logout';">Logout</button>
     </body>
 </html>
