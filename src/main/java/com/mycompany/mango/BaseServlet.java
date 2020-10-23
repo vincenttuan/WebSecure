@@ -23,7 +23,7 @@ public class BaseServlet extends HttpServlet {
     }
     
     protected List<Map<String, Object>> query() {
-        String sql = "SELECT ID, MYNAME, CARDNO, AMOUNT, MEMO, TS FROM MANGO";
+        String sql = "SELECT ID, MYNAME, AMOUNT, MEMO, TS FROM MANGO";
         try(PreparedStatement stmt = conn.prepareStatement(sql);) {
             ResultSet rs = stmt.executeQuery();
             BasicRowProcessor convert = new BasicRowProcessor();

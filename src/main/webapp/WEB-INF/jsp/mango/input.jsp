@@ -34,9 +34,11 @@
         <table class="pure-table pure-table-bordered">
             <thead>
                 <tr>
-                    <th>myname</th>
-                    <th>amount</th>
-                    <th>memo</th>
+                    <th>ID</th>
+                    <th>MYNAME</th>
+                    <th>AMOUNT</th>
+                    <th>MEMO</th>
+                    <th>TS</th>
                 </tr>
             </thead>
             <tbody>
