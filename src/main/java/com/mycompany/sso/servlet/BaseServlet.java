@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -62,11 +63,13 @@ public class BaseServlet extends HttpServlet {
     // A01, 1qaz@WSX
     protected boolean login(String username, String password) {
         // 驗證 username
-        String sql = "SELECT username, salt FROM Member WHERE username = '" + username + "'";
+        //String sql = "SELECT username, salt FROM Member WHERE username = '" + username + "'";
+        String sql = "SELECT username, salt FROM Member WHERE username = ?";
         System.out.println(sql);
         int salt = 0;
-        try(Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);) {
+        try(PreparedStatement stmt = conn.prepareStatement(sql);) {
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
             if(rs.next()) {
                 salt = rs.getInt("salt"); // 得到 salt
                 System.out.println("Salt:" + salt);
@@ -79,10 +82,14 @@ public class BaseServlet extends HttpServlet {
         
         // 驗證 password
         password = SHA2.getSHA256(password, salt);
-        sql = "SELECT username, password, salt FROM Member WHERE username = '" + username + "' and password = '" + password + "' and salt = " + salt;
+        //sql = "SELECT username, password, salt FROM Member WHERE username = '" + username + "' and password = '" + password + "' and salt = " + salt;
+        sql = "SELECT username, password, salt FROM Member WHERE username = ? and password = ? and salt = ?";
         System.out.println(sql);
-        try(Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);) {
+        try(PreparedStatement stmt = conn.prepareStatement(sql);) {
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            stmt.setInt(3, salt);
+            ResultSet rs = stmt.executeQuery();
             if(rs.next()) {
                 System.out.println("驗證 password 成功");
                 return true;
