@@ -10,7 +10,7 @@
         <form class="pure-form" method="post" action="">
             <table>
                 <tr>
-                    <td valign="top"><img border=0 width="300" src="mango.jpg" /></td>
+                    <td valign="top"><img border=0 width="300" src="/WebSecure/mango/mango.jpg" /></td>
                     <td valign="top">
                         <fieldset>
                             <legend>Mango</legend>
