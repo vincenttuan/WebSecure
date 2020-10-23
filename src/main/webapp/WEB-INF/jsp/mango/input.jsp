@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,6 +30,7 @@
                 </tr>
             </table>
         </form>
+        
         <table class="pure-table pure-table-bordered">
             <thead>
                 <tr>
