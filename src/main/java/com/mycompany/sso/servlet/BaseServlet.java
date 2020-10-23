@@ -34,10 +34,12 @@ public class BaseServlet extends HttpServlet {
     }
     
     protected List<Map<String, Object>> getSalary(String username) {
-        String sql = "SELECT username, money FROM Salary WHERE username='" + username + "'";
+        //String sql = "SELECT username, money FROM Salary WHERE username='" + username + "'";
+        String sql = "SELECT username, money FROM Salary WHERE username=?";
         System.out.println(sql);
-        try(Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);) {
+        try(PreparedStatement stmt = conn.prepareStatement(sql);) {
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
             BasicRowProcessor convert = new BasicRowProcessor();
             MapListHandler handler = new MapListHandler(convert);
             return handler.handle(rs);
@@ -48,9 +50,11 @@ public class BaseServlet extends HttpServlet {
     }
     
     protected List<Map<String, Object>> getMember(String username) {
-        String sql = "SELECT username, email FROM Member WHERE username='" + username + "'";
-        try(Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);) {
+        //String sql = "SELECT username, email FROM Member WHERE username='" + username + "'";
+        String sql = "SELECT username, email FROM Member WHERE username=?";
+        try(PreparedStatement stmt = conn.prepareStatement(sql);) {
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
             BasicRowProcessor convert = new BasicRowProcessor();
             MapListHandler handler = new MapListHandler(convert);
             return handler.handle(rs);
