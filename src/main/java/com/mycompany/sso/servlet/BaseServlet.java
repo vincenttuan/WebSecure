@@ -110,16 +110,32 @@ public class BaseServlet extends HttpServlet {
         int salt = new Random().nextInt(10_0000);
         password = SHA2.getSHA256(password, salt);
         int bonus = new Random().nextInt(10_0000);
-        String sql_1 = "INSERT INTO Member(username, password, salt, email) values ('" + username + "', '" + password + "', " + salt + ", '" + email + "')";
-        String sql_2 = "INSERT INTO Salary(username, money, bonus) values ('" + username + "', " + money + ", " + bonus + ")";
-        try(Statement stmt = conn.createStatement();) {
+        //String sql_1 = "INSERT INTO Member(username, password, salt, email) values ('" + username + "', '" + password + "', " + salt + ", '" + email + "')";
+        //String sql_2 = "INSERT INTO Salary(username, money, bonus) values ('" + username + "', " + money + ", " + bonus + ")";
+        String sql_1 = "INSERT INTO Member(username, password, salt, email) values (?, ?, ?, ?)";
+        String sql_2 = "INSERT INTO Salary(username, money, bonus) values (?, ?, ?)";
+        
+        try(PreparedStatement stmt1 = conn.prepareStatement(sql_1);
+            PreparedStatement stmt2 = conn.prepareStatement(sql_2);) {
             conn.setAutoCommit(false);
-            stmt.clearBatch();
-            stmt.addBatch(sql_1);
-            stmt.addBatch(sql_2);
-            int[] rowscount = stmt.executeBatch();
+            stmt1.clearBatch();
+            stmt1.setString(1, username);
+            stmt1.setString(2, password);
+            stmt1.setInt(3, salt);
+            stmt1.setString(4, email);
+            stmt1.addBatch();
+            
+            stmt2.clearBatch();
+            stmt2.setString(1, username);
+            stmt2.setInt(2, money);
+            stmt2.setInt(3, bonus);
+            stmt2.addBatch();
+            
+            int[] rowscount1 = stmt1.executeBatch();
+            int[] rowscount2 = stmt2.executeBatch();
             conn.commit();
-            if(Arrays.stream(rowscount).sum() == 2) {
+            if(Arrays.stream(rowscount1).sum() == 1 && 
+               Arrays.stream(rowscount2).sum() == 1) {
                 return true;
             } else {
                 conn.rollback();
