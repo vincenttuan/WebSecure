@@ -1,6 +1,7 @@
 package com.mycompany.sso.servlet;
 
 import java.io.IOException;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,16 @@ public class LoginServlet extends BaseServlet {
             resp.getWriter().print("login error");
             return;
         }
+        // 是否已經登入過 ?
+        Set<String> usernames = (Set<String>)getServletContext().getAttribute("usernames");
+        boolean flag = usernames.stream().filter(u -> u.equals(username)).findAny().isPresent();
+        if(flag) {
+            resp.getWriter().print(username + " already login !");
+            return;
+        }
+        // 加入 usernames 集合中
+        usernames.add(username);
+        
         // 加入 session
         HttpSession session = req.getSession(true);
         session.setAttribute("username", username);
