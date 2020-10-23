@@ -34,6 +34,7 @@ public class BaseServlet extends HttpServlet {
     
     protected List<Map<String, Object>> getSalary(String username) {
         String sql = "SELECT username, money FROM Salary WHERE username='" + username + "'";
+        System.out.println(sql);
         try(Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);) {
             BasicRowProcessor convert = new BasicRowProcessor();
