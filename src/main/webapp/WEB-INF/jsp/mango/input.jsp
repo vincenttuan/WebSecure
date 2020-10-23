@@ -8,7 +8,7 @@
         <title>Mango</title>
     </head>
     <body style="padding: 20px">
-        <form class="pure-form" method="post" action="">
+        <form class="pure-form" method="post" action="/WebSecure/mango/buy">
             <table>
                 <tr>
                     <td valign="top"><img border=0 width="300" src="/WebSecure/mango/mango.jpg" /></td>
