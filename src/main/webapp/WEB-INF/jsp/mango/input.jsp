@@ -1,16 +1,21 @@
+<%@page import="java.security.SecureRandom"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <%
     response.setHeader("X-XSS-Protection", "1; mode=block");
-    response.setHeader("Content-Security-Policy", "script-src 'self' 'nonce-1234'");
+    SecureRandom r = new SecureRandom();
+    int nonce = r.nextInt(1000000000);
+    request.setAttribute("nonce", nonce);
+    response.setHeader("Content-Security-Policy", "script-src 'self' 'nonce-" + nonce + "'");
+    
 %>
 <html>
     <head>
         <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mango</title>
-        <script nonce="1234">
+        <script nonce="${nonce}">
             alert('芒果團購');
         </script>
     </head>
