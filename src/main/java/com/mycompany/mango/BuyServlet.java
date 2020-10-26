@@ -24,7 +24,11 @@ public class BuyServlet extends BaseServlet {
             req.setAttribute("message", "新增成功");
             // 寫入 Cookie
             Cookie cookie_myName = new Cookie("myName", myName);
+            //cookie_myName.setHttpOnly(true);
+            //cookie_myName.setSecure(true);
             Cookie cookie_cardNo = new Cookie("cardNo", cardNo);
+            //cookie_cardNo.setHttpOnly(true);
+            //cookie_cardNo.setSecure(true);
             resp.addCookie(cookie_myName);
             resp.addCookie(cookie_cardNo);
         } else {

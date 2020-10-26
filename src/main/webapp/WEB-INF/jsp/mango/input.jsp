@@ -1,11 +1,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<%
+    response.setHeader("X-XSS-Protection", "1; mode=block");
+    response.setHeader("Content-Security-Policy", "script-src 'self' 'nonce-1234'");
+%>
 <html>
     <head>
         <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mango</title>
+        <script nonce="1234">
+            alert('芒果團購');
+        </script>
     </head>
     <body style="padding: 20px">
         <form class="pure-form" method="post" action="/WebSecure/mango/buy">
@@ -45,7 +52,9 @@
                 <c:forEach var="map" items="${list}">
                 <tr>
                     <c:forEach var="m" items="${map}">
-                        <td>${m.value}</td>
+                        <td>
+                            ${m.value}
+                        </td>
                     </c:forEach>    
                 </tr>
                 </c:forEach>
