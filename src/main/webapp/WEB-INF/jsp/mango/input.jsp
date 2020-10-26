@@ -15,8 +15,8 @@
                     <td valign="top">
                         <fieldset>
                             <legend>Mango</legend>
-                            <input type="text" placeholder="持卡人姓名" name="myName" value="" /><p />
-                            <input type="text" placeholder="信用卡資料" name="cardNo" value="" /><p />
+                            <input type="text" placeholder="持卡人姓名" name="myName" value="${cookie.myName.value}" /><p />
+                            <input type="text" placeholder="信用卡資料" name="cardNo" value="${cookie.cardNo.value}" /><p />
                             <input type="number" placeholder="數量" name="amount" /><p />
                             <button type="submit" class="pure-button pure-button-primary">Buy</button>
                         </fieldset>
