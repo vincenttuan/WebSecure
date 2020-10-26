@@ -30,7 +30,7 @@
                 </tr>
             </table>
         </form>
-        
+        ${message}
         <table class="pure-table pure-table-bordered">
             <thead>
                 <tr>
