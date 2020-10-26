@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,11 @@ public class BuyServlet extends BaseServlet {
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/mango/input");
         if(check) {
             req.setAttribute("message", "新增成功");
+            // 寫入 Cookie
+            Cookie cookie_myName = new Cookie("myName", myName);
+            Cookie cookie_cardNo = new Cookie("cardNo", cardNo);
+            resp.addCookie(cookie_myName);
+            resp.addCookie(cookie_cardNo);
         } else {
             req.setAttribute("message", "新增失敗");
         }
