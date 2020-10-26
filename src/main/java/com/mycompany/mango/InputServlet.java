@@ -12,13 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/mango/input")
 public class InputServlet extends BaseServlet {
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doHandler(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Map<String, Object>> list = query();
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/jsp/mango/input.jsp");
         req.setAttribute("list", list);
         rd.forward(req, resp);
+    }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doHandler(req, resp);
+    }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doHandler(req, resp);
     }
     
 }
