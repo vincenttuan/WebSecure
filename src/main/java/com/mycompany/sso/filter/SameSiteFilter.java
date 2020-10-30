@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpHeaders;
 
-@WebFilter("/*")
+@WebFilter(urlPatterns = {"/*"})
 public class SameSiteFilter implements javax.servlet.Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
