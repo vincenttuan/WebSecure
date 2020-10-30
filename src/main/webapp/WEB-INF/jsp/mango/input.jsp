@@ -16,7 +16,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mango</title>
         <script nonce="${nonce}">
-            alert('芒果團購');
+            //alert('芒果團購');
         </script>
     </head>
     <body style="padding: 20px">

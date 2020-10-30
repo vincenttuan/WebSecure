@@ -35,5 +35,6 @@
         </table>
         <p />
         <button type="button" class="pure-button pure-button-primary" onclick="window.location.href='/WebSecure/sso/logout';">Logout</button>
+        <button type="button" class="pure-button pure-button-primary" onclick="window.location.href='/WebSecure/mango/input';">Mango</button>
     </body>
 </html>
