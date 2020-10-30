@@ -2,6 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+    //response.setHeader("X-Frame-Options", "DENY");
     response.setHeader("X-Frame-Options", "SAMEORIGIN");
 %>
 <html>
