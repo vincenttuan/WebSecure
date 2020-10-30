@@ -24,9 +24,9 @@
                             <c:when test="${m.key == 'USERNAME'}">
                                 <td><a href="/WebSecure/sso/view/salary?username=${m.value}">${m.value}</a></td>
                             </c:when>
-                            <c:when test="${m.key == 'EMAIL'}">
+                            <c:otherwise>
                                 <td>${m.value}</td>
-                            </c:when>
+                            </c:otherwise>   
                         </c:choose>
                     </c:forEach>
                 </tr>
