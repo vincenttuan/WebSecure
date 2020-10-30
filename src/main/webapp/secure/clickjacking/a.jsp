@@ -7,6 +7,6 @@
     </head>
     <body>
         <h1>a.jsp</h1>
-        <iframe src="b.jsp"></iframe>
+        <iframe src="https://127.0.0.1:8443/WebSecure/secure/clickjacking/b.jsp"></iframe>
     </body>
 </html>
