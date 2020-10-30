@@ -13,6 +13,7 @@
                 <tr>
                     <th>username</th>
                     <th>email</th>
+                    <th>cardno</th>
                 </tr>
             </thead>
             <tbody>

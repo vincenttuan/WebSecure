@@ -51,7 +51,7 @@ public class BaseServlet extends HttpServlet {
     
     protected List<Map<String, Object>> getMember(String username) {
         //String sql = "SELECT username, email FROM Member WHERE username='" + username + "'";
-        String sql = "SELECT username, email FROM Member WHERE username=?";
+        String sql = "SELECT username, email, cardno FROM Member WHERE username=?";
         try(PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
