@@ -42,6 +42,7 @@ public class LoginServlet extends BaseServlet {
         // 加入 session
         HttpSession session = req.getSession(true);
         session.setAttribute("username", username);
+        session.setAttribute("member", getMember(username));
         //resp.getWriter().print("login ok");
         resp.sendRedirect("/WebSecure/sso/view/member?username=" + username);
     }
